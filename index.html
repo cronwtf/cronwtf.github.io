@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<title>CronWTF!</title>
+<script type="text/javascript" src="javascripts/cronwtf.js"></script>
+<script type="text/javascript" src="javascripts/mootools.js"></script>
+<link rel="stylesheet" href="./stylesheets/jsspec.css">
+<script type="text/javascript">
+window.onload = function() {
+  $('cron').addEvents({
+    keyup: function() { this.fireEvent('cron') },
+    cron:  function() {
+      var list = $('results')
+
+      while(list.childNodes.length > 0)
+        list.removeChild(list.childNodes[0])
+
+      CronWTF.parse(this.value).each(function(entry) {
+        list.appendChild(new Element('li', {text: entry}))
+      })
+    }
+  })
+  $('cron').fireEvent('cron')
+}
+</script>
+<style type="text/css">
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+#img {
+  width:400px;
+  float:right;
+  padding:0;
+  margin:0 0 1.5em 1.5em;
+}
+
+#img img { margin:0; padding:0;}
+
+textarea {
+  width:450px;
+  height:100px;
+}
+</style>
+</head>
+<body>
+  <div id="wrapper">
+    <form>
+      <div>
+        <textarea id="cron">#min hour dom mon dow
+ 0   0    1   *   *   COMMAND
+</textarea>
+        <ul id="results"></ul>
+        <p><a href="#">instructions</a>, <a href="test.html">tests</a>, <a href="#">code</a><a href="https://coindataflow.com/de/aktie/SEOVF"><img class="cdf" src="./images/cdf.svg" alt="aktienkurs sernova"></a></p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
